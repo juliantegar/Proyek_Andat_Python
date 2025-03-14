@@ -85,22 +85,4 @@ plt.ylabel('Rata-rata Penyewaan Sepeda')
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 st.pyplot(plt)
 
-st.write('Kelompok Pengguna Sepeda Berdasarkan Jumlah Pengguna & Suhu')
-X = day_df[['cnt', 'temp']]
-from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
-kmeans = KMeans(n_clusters=3, random_state=42)
-day_df['cluster'] = kmeans.fit_predict(X_scaled)
-
-
-plt.figure(figsize=(8,6))
-sns.scatterplot(x=day_df['cnt'], y=day_df['temp'], hue=day_df['cluster'], palette=['blue', 'red', 'green'], alpha=0.7)
-plt.title('Clustering Penggunaan Sepeda berdasarkan Jumlah Penyewaan & Suhu')
-plt.xlabel('Jumlah Penyewaan Sepeda')
-plt.ylabel('Suhu')
-plt.legend(title='Cluster')
-plt.grid(True)
-plt.show()
-
 st.caption('Copyright © Dicoding 2023')
