@@ -7,7 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1MAtXQLwmTXrV_gOtlDfCPubABM5IuWJO
 """
 
-from seaborn._core.data import PlotData
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
