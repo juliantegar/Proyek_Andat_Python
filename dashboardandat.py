@@ -85,4 +85,23 @@ plt.ylabel('Rata-rata Penyewaan Sepeda')
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 st.pyplot(plt)
 
+# Menambahkan filter kondisi cuaca di sidebar
+weather_options = day_df['weathersit'].unique()  # Ambil kategori unik
+selected_weather = st.sidebar.multiselect("Pilih Kondisi Cuaca:", weather_options, default=weather_options)
+
+# Filter data berdasarkan pilihan pengguna
+filtered_df = day_df[day_df['weathersit'].isin(selected_weather)]
+
+# Hitung rata-rata penyewaan sepeda berdasarkan cuaca yang dipilih
+weather_usage = filtered_df.groupby('weathersit')['cnt'].mean().reset_index()
+
+# Visualisasi data dengan filter
+plt.figure(figsize=(12, 5))
+sns.barplot(x='weathersit', y='cnt', data=weather_usage, palette="coolwarm")
+plt.title('Rata-rata Penyewaan Sepeda Berdasarkan Kondisi Cuaca')
+plt.xlabel('Kondisi Cuaca')
+plt.ylabel('Rata-rata Penyewaan Sepeda')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+st.pyplot(plt)
+
 st.caption('Copyright © Dicoding 2023')
