@@ -70,17 +70,16 @@ plt.ylabel('Rata-rata Penyewaan Sepeda')
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 st.pyplot(plt)
 
-st.write('Penggunaan Sepeda berdasarkan Kondisi Cuaca')
 weather_mapping = {1: 'Clear', 2: 'Mist', 3: 'Light Snow', 4: 'Heavy Rain'}
 day_df['weathersit'] = day_df['weathersit'].replace(weather_mapping)
+st.sidebar.header("Filter Data")
 weather_options = day_df['weathersit'].unique().tolist()
 selected_weather = st.sidebar.multiselect("Pilih Kondisi Cuaca", weather_options, default=weather_options)
 filtered_df = day_df[day_df['weathersit'].isin(selected_weather)]
 st.subheader("Penggunaan Sepeda berdasarkan Kondisi Cuaca")
 weather_usage = filtered_df.groupby('weathersit')['cnt'].mean().reset_index()
-
 plt.figure(figsize=(12, 5))
-sns.barplot(x='weathersit', y='cnt', data=weather_usage, color='brown')
+sns.barplot(x='weathersit', y='cnt', data=weather_usage, palette='coolwarm')
 plt.title('Rata-rata Penyewaan Sepeda Berdasarkan Kondisi Cuaca')
 plt.xlabel('Kondisi Cuaca')
 plt.ylabel('Rata-rata Penyewaan Sepeda')
