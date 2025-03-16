@@ -72,6 +72,7 @@ st.pyplot(plt)
 
 st.write('Penggunaan Sepeda berdasarkan Kondisi Cuaca')
 weather_mapping = {1: 'Clear', 2: 'Mist', 3: 'Light Snow', 4: 'Heavy Rain'}
+day_df['weathersit'] = day_df['weathersit'].replace(weather_mapping)
 weather_options = day_df['weathersit'].unique().tolist()
 selected_weather = st.sidebar.multiselect("Pilih Kondisi Cuaca", weather_options, default=weather_options)
 filtered_df = day_df[day_df['weathersit'].isin(selected_weather)]
